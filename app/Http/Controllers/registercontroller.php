@@ -34,7 +34,8 @@ class registercontroller extends Controller
         ]);
        // dd($data);
         // Redirect or show a success message
-        return redirect('/')->with('success', 'Registration successful! Please log in.');
+        return redirect('rega');
+        //return redirect('/')->with('success', 'Registration successful! Please log in.');
     }
 
     public function registertableabc() {
@@ -42,7 +43,7 @@ class registercontroller extends Controller
         // $data1 = $data->get('password');
         $data1 = $data->pluck('password')->first();
 
-        dd($data1);
+        //dd($data1);
         return view('registertable', ['data' => $data]);
     }
     

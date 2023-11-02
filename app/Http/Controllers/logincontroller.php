@@ -23,7 +23,8 @@ class logincontroller extends Controller
             'username' => $request->input('username'),
             'password' => bcrypt($request->input('password')), // Use bcrypt for password hashing
         ]);
-        return view('login');// Assuming you have a 'login' view
+        return redirect ('/int');
+        //return view('login');// Assuming you have a 'login' view
 
     }
     public function logintableabc() {
@@ -34,8 +35,48 @@ class logincontroller extends Controller
     
 
 
-    //
-
     
+    // public function update(Request $request, $id)
+    // {
+    //     // Get the updated data from the request
+    //     $data = $request->all();
+        
+    //     // Find the user by ID
+    //    // $user = User::find($id);
+
+    //     // Update the user's data
+    //    // $user->update($data);
+
+    //     // Return a response, e.g., a success message
+    //     return response()->json(['message' => 'User updated successfully']);
+    // }
+    
+//for deletion
+
+    public function destroy(Request $request ,$id)
+    {
+        $data = login::find($id);
+        //dd($data);
+
+        if (!$data) {
+            return response()->json(['message' => 'Data not found'], 404);
+        }
+
+        $data->delete();
+
+        return response()->json(['message' => 'Data deleted successfully']);
+    }
+
+//for updation
+
+public function update(Request $request, $id)
+{
+    // Validate and update the data
+    $data = login::findOrFail($id);
+    $data->update($request->all());
+
+    return response()->json(['message' => 'Data updated successfully']);
+}
+
 
 }
